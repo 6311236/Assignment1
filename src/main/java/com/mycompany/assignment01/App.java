@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
@@ -71,7 +72,7 @@ public class App extends Application {
         promptLabel = new Label(textLines[currentIndex]);
         
         typedField = new TextField();
-        typedField.setPrefWidth(500);
+        typedField.setPrefWidth(200);
         
         counterLabel = new Label((currentIndex + 1) + " of " + textLines.length);
         
@@ -83,6 +84,40 @@ public class App extends Application {
         
         correctLabel = new Label("Correct: 0");
         incorrectLabel = new Label("Incorrect: 0");
+        
+        
+        // NEXT BUTTON TO MOVE ON TP NEXT TEXT LINE
+        Button nextButton = new Button("Next");
+        nextButton.setOnAction(event -> {
+            
+            if (currentIndex < textLines.length - 1) {
+                
+                currentIndex++;
+                promptLabel.setText(textLines[currentIndex]);
+                typedField.setText("");
+                counterLabel.setText((currentIndex + 1) + " of " + textLines.length);
+            }
+          
+            root.requestFocus(); // chsnce of glitching if the focus isnt set back to base layout as itll stay focused on button and nothing else will work
+        });
+
+        // RESET BUTTON TO SET EVERYTHING BACK TO 0 IF NOT PROGRM GLITCH AND RESET TEXT LINES TO BEGINNING
+        Button resetButton = new Button("Reset");
+        resetButton.setOnAction(event -> {
+            
+            currentIndex = 0;
+            promptLabel.setText(textLines[currentIndex]);
+            typedField.setText("");
+            counterLabel.setText((currentIndex + 1) + " of " + textLines.length);
+            correctCount = 0;
+            incorrectCount = 0;
+            correctLabel.setText("Correct: 0");
+            incorrectLabel.setText("Incorrect: 0");
+            keyValueLabel.setText("Key: ");
+            notHandledLabel.setText("");
+            
+            root.requestFocus(); // same reason as above, need to make sure focus is set back
+        });
         
     }
 
