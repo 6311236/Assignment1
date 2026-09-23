@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -118,6 +119,20 @@ public class App extends Application {
             
             root.requestFocus(); // same reason as above, need to make sure focus is set back
         });
+        
+        // Adding next button, reset button and the counter label for the text lines into an hbox
+        HBox controlBox = new HBox(10, nextButton, resetButton, counterLabel);
+        controlBox.setAlignment(Pos.CENTER);
+
+        // Adding key value label, correct and incorrect labels and the exception not handled label into an hbox for display
+        HBox statsBox = new HBox(20, keyValueLabel, correctLabel, incorrectLabel, notHandledLabel);
+        statsBox.setAlignment(Pos.CENTER);
+
+        // Adding the main instruction label, the prompt label for the text lines and the type field into vbox for display
+        VBox topBox = new VBox(10, instructionLabel, promptLabel, typedField, controlBox, statsBox);
+        topBox.setPadding(new Insets(15));
+        topBox.setAlignment(Pos.CENTER);
+
         
     }
 
