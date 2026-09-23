@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -58,6 +59,9 @@ public class App extends Application {
     
     // to keep track of the incorrect keys that were pressed
     private int incorrectCount = 0;
+    
+    // Button array for all of they key buttons (will be needed after to loop through fpr each key so having in one array to loop is best)
+    private Button[] allKeyButtons;
 
     @Override
     public void start(Stage stage) {
@@ -134,6 +138,31 @@ public class App extends Application {
         topBox.setAlignment(Pos.CENTER);
 
         
+    }
+    
+    private VBox buildKeyboard() {
+        String[][] rows = {
+            {"`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace"},
+            {"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\"},
+            {"A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter"},
+            {"Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"},
+            {"Space"}
+        };
+
+        // needed to count how many key buttons there will be so that we can have a size for the array
+        
+        int totalKeys = 0;
+        for (String[] row : rows) {
+            totalKeys = totalKeys + row.length;
+        }
+        allKeyButtons = new Button[totalKeys];
+        int nextIndex = 0;
+
+        VBox keyboardBox = new VBox(5);
+        keyboardBox.setAlignment(Pos.CENTER);
+
+        
+        return keyboardBox;
     }
 
     public static void main(String[] args) {
