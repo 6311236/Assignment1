@@ -142,6 +142,7 @@ public class App extends Application {
     
     private VBox buildKeyboard() {
         String[][] rows = {
+            
             {"`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace"},
             {"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\"},
             {"A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter"},
@@ -152,17 +153,51 @@ public class App extends Application {
         // needed to count how many key buttons there will be so that we can have a size for the array
         
         int totalKeys = 0;
+        
         for (String[] row : rows) {
+            
             totalKeys = totalKeys + row.length;
         }
         allKeyButtons = new Button[totalKeys];
+        
         int nextIndex = 0;
 
         VBox keyboardBox = new VBox(5);
         keyboardBox.setAlignment(Pos.CENTER);
 
+        for (String[] row : rows) {
+            
+            HBox rowBox = new HBox(5);
+            rowBox.setAlignment(Pos.CENTER);
+
+            for (String label : row) {
+                
+                Button keyButton = new Button(label);
+                keyButton.setPrefSize(getKeyWidth(label), 40);
+
+            }
+            keyboardBox.getChildren().add(rowBox);
+        }
         
         return keyboardBox;
+    }
+    
+    //to return a wider width for the larger keys to match a irl keyboard and if not other keys normal (USED PROPORTIONS OF MY ALIENWARE LAPTOP FOR PROPORTIONS)
+    
+    private double getKeyWidth(String label) {
+        
+        if (label.equals("Space")) {
+            
+            return 300;
+            
+        } else if (label.equals("Backspace") || label.equals("Enter") || label.equals("Shift")) {
+            
+            return 80;
+            
+        } else {
+            
+            return 40;
+        }
     }
 
     public static void main(String[] args) {
