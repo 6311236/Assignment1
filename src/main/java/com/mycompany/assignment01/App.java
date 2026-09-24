@@ -174,6 +174,14 @@ public class App extends Application {
                 
                 Button keyButton = new Button(label);
                 keyButton.setPrefSize(getKeyWidth(label), 40);
+                
+                // attaching the matching keyCode to the real button itself so it can be found later when actually physicially pressed down
+                 
+                KeyCode code = labelToKeyCode(label);
+                keyButton.setUserData(code);
+
+                allKeyButtons[nextIndex] = keyButton;
+                nextIndex++;
 
             }
             keyboardBox.getChildren().add(rowBox);
@@ -197,6 +205,68 @@ public class App extends Application {
         } else {
             
             return 40;
+        }
+    }
+    
+    // to map a virtual keyboard button label to the physical actual keyCode that it represents by comparing directly against keyCode constants (https://docs.oracle.com/javase/8/javafx/api/javafx/scene/input/KeyCode.html keep here for quick reference back if needed)
+     
+    private KeyCode labelToKeyCode(String label) {
+        
+        switch (label) {
+            
+            case "`": return KeyCode.BACK_QUOTE;
+            case "1": return KeyCode.DIGIT1;
+            case "2": return KeyCode.DIGIT2;
+            case "3": return KeyCode.DIGIT3;
+            case "4": return KeyCode.DIGIT4;
+            case "5": return KeyCode.DIGIT5;
+            case "6": return KeyCode.DIGIT6;
+            case "7": return KeyCode.DIGIT7;
+            case "8": return KeyCode.DIGIT8;
+            case "9": return KeyCode.DIGIT9;
+            case "0": return KeyCode.DIGIT0;
+            case "-": return KeyCode.MINUS;
+            case "=": return KeyCode.EQUALS;
+            case "Backspace": return KeyCode.BACK_SPACE;
+            case "Q": return KeyCode.Q;
+            case "W": return KeyCode.W;
+            case "E": return KeyCode.E;
+            case "R": return KeyCode.R;
+            case "T": return KeyCode.T;
+            case "Y": return KeyCode.Y;
+            case "U": return KeyCode.U;
+            case "I": return KeyCode.I;
+            case "O": return KeyCode.O;
+            case "P": return KeyCode.P;
+            case "[": return KeyCode.OPEN_BRACKET;
+            case "]": return KeyCode.CLOSE_BRACKET;
+            case "\\": return KeyCode.BACK_SLASH;
+            case "A": return KeyCode.A;
+            case "S": return KeyCode.S;
+            case "D": return KeyCode.D;
+            case "F": return KeyCode.F;
+            case "G": return KeyCode.G;
+            case "H": return KeyCode.H;
+            case "J": return KeyCode.J;
+            case "K": return KeyCode.K;
+            case "L": return KeyCode.L;
+            case ";": return KeyCode.SEMICOLON;
+            case "'": return KeyCode.QUOTE;
+            case "Enter": return KeyCode.ENTER;
+            case "Shift": return KeyCode.SHIFT;
+            case "Z": return KeyCode.Z;
+            case "X": return KeyCode.X;
+            case "C": return KeyCode.C;
+            case "V": return KeyCode.V;
+            case "B": return KeyCode.B;
+            case "N": return KeyCode.N;
+            case "M": return KeyCode.M;
+            case ",": return KeyCode.COMMA;
+            case ".": return KeyCode.PERIOD;
+            case "/": return KeyCode.SLASH;
+            case "Space": return KeyCode.SPACE;
+            
+            default: return null;
         }
     }
 
