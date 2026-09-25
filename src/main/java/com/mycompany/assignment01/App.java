@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -136,6 +137,55 @@ public class App extends Application {
         VBox topBox = new VBox(10, instructionLabel, promptLabel, typedField, controlBox, statsBox);
         topBox.setPadding(new Insets(15));
         topBox.setAlignment(Pos.CENTER);
+        
+        // making the actual virtual keyboard 
+        
+        VBox keyboard = buildKeyboard();
+
+        root.getChildren().addAll(topBox, keyboard);
+
+        Scene scene = new Scene(root, 800, 800);
+        
+        stage.setScene(scene);
+        
+        stage.show();
+    }
+    
+     private void handleKeyPressed(KeyEvent event) {
+         
+        KeyCode code = event.getCode();
+
+        // to disiply a name for the key being pressed
+        
+        if (code == KeyCode.SPACE) {
+            
+            keyValueLabel.setText("Key: SPACE");
+            
+        } else if (code == KeyCode.BACK_SPACE) {
+            
+            keyValueLabel.setText("Key: BACKSPACE");
+            
+            // for the user to use backspace to remove errors (IF NOT WOLL CAUSE GLITCH AND NOT ABLE TO FIX SENTENCE)
+            
+            String currentTyped = typedField.getText();
+            
+            if (currentTyped.length() > 0) {
+                
+                typedField.setText(currentTyped.substring(0, currentTyped.length() - 1));
+            }
+            
+        } else if (code == KeyCode.ENTER) {
+            
+            keyValueLabel.setText("Key: ENTER");
+            
+        } else if (code == KeyCode.SHIFT) {
+            
+            keyValueLabel.setText("Key: SHIFT");
+            
+        } else {
+            
+            keyValueLabel.setText("Key: " + code.getName());
+        }
 
         
     }
