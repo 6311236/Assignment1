@@ -186,8 +186,39 @@ public class App extends Application {
             
             keyValueLabel.setText("Key: " + code.getName());
         }
+        
+        //needed to find the corresponding virtual key
+        
+        Button vKey = findButtonForKeyCode(code);
+        
+        if (vKey != null) {
+            
+            notHandledLabel.setText("");
+            
+        } else {
+            
+            // key wont e set
+            notHandledLabel.setText("Not handled");
+        }
 
         
+    }
+     
+    
+    //searches the virtual keyboard for the button stored KeyCode from setuserdata matches the given keyCode, will returns null if no virtual key represents this physical key
+ 
+    private Button findButtonForKeyCode(KeyCode code) {
+        
+        for (int i = 0; i < allKeyButtons.length; i++) {
+            
+            if (allKeyButtons[i].getUserData() == code) {
+                
+                return allKeyButtons[i];
+            }
+        }
+        
+        
+        return null;
     }
     
     private VBox buildKeyboard() {
