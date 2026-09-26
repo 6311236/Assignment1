@@ -87,6 +87,7 @@ public class App extends Application {
         keyValueLabel = new Label("Key: ");
         
         notHandledLabel = new Label(); // will need to make like red
+        notHandledLabel.setStyle("-fx-text-fill: red;");
         
         correctLabel = new Label("Correct: 0");
         incorrectLabel = new Label("Incorrect: 0");
@@ -202,6 +203,7 @@ public class App extends Application {
         
         if (vKey != null) {
             
+            vKey.setStyle("-fx-background-color: lightgreen;"); //SHOULD LIGHTUP GREEN TO SEE WHEN UR CLICKING CHECK FAST IF WORK
             notHandledLabel.setText("");
             
         } else {
@@ -326,6 +328,8 @@ public class App extends Application {
 
                 allKeyButtons[nextIndex] = keyButton;
                 nextIndex++;
+                
+                rowBox.getChildren().add(keyButton);
 
             }
             keyboardBox.getChildren().add(rowBox);
