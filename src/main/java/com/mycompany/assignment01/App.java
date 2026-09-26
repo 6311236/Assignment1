@@ -146,9 +146,18 @@ public class App extends Application {
 
         Scene scene = new Scene(root, 800, 800);
         
+        // needed events on keyboard strokes for handlekeypressed, handlekeyreleased and handlekeytyped
+        
+        scene.setOnKeyPressed(event -> handleKeyPressed(event));
+        scene.setOnKeyReleased(event -> handleKeyReleased(event));
+        scene.setOnKeyTyped(event -> handleKeyTyped(event));
+        
         stage.setScene(scene);
         
         stage.show();
+        
+        root.requestFocus();
+        
     }
     
      private void handleKeyPressed(KeyEvent event) {
@@ -259,6 +268,20 @@ public class App extends Application {
         
         
         return null;
+    }
+    
+    
+    //handles a KEY_RELEASED event from the physical keyboard and returns the matching virtual key to its normal look
+    
+    private void handleKeyReleased(KeyEvent event) {
+        
+        KeyCode code = event.getCode();
+        Button vKey = findButtonForKeyCode(code);
+        
+        if (vKey != null) {
+            
+            vKey.setStyle(""); // go back to looking norma;
+        }
     }
     
     private VBox buildKeyboard() {
