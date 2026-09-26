@@ -204,6 +204,46 @@ public class App extends Application {
         
     }
      
+    private void handleKeyTyped(KeyEvent event) {
+        
+        String character = event.getCharacter();
+
+        //needed to ignore control characters like backspace and enter to produce non printable characters here
+        
+       
+        if (character.equals("") || character.charAt(0) < 32) {
+            
+            return;
+        }
+
+        keyValueLabel.setText("Key: " + character);
+
+        String targetText = textLines[currentIndex];
+        String currentTyped = typedField.getText();
+        int pos = currentTyped.length();
+
+        if (pos < targetText.length()) {
+            
+            char expectedChar = targetText.charAt(pos);
+            char typedChar = character.charAt(0);
+            
+            if (typedChar == expectedChar) {
+                
+                correctCount++;
+                
+            } else {
+                
+                incorrectCount++;
+            }
+            
+            correctLabel.setText("Correct: " + correctCount);
+            incorrectLabel.setText("Incorrect: " + incorrectCount);
+        }
+
+        // add the typed character to the response field
+        typedField.setText(currentTyped + character);
+    }
+     
     
     //searches the virtual keyboard for the button stored KeyCode from setuserdata matches the given keyCode, will returns null if no virtual key represents this physical key
  
